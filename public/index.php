@@ -1,24 +1,16 @@
 <?php
-// +----------------------------------------------------------------------
-// | ThinkPHP [ WE CAN DO IT JUST THINK ]
-// +----------------------------------------------------------------------
-// | Copyright (c) 2006-2019 http://thinkphp.cn All rights reserved.
-// +----------------------------------------------------------------------
-// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
-// +----------------------------------------------------------------------
-// | Author: liu21st <liu21st@gmail.com>
-// +----------------------------------------------------------------------
 
 // [ 应用入口文件 ]
-namespace think;
 
-require __DIR__ . '/../vendor/autoload.php';
+// 检测PHP版本
+if (version_compare(PHP_VERSION, '5.4.0', '<')) die('require PHP > 5.4.0 !');
+if (version_compare(PHP_VERSION, '7.4.0', '>=')) die('require PHP < 7.4.0 !');
 
-// 执行HTTP应用并响应
-$http = (new App())->http;
+// 定义运行目录
+define('WEB_PATH', __DIR__ . '/');
 
-$response = $http->run();
+// 定义应用目录
+define('APP_PATH', WEB_PATH . '../source/application/');
 
-$response->send();
-
-$http->end($response);
+// 加载框架引导文件
+require APP_PATH . '../thinkphp/start.php';
